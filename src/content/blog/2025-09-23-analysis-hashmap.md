@@ -1,9 +1,9 @@
 ---
 title: 剖析 HashMap
-description: 介绍 HashMap 的基本用法和底层原理
-publishDate: '2025-09-23 19:14'
+description: 深入解析 HashMap 结构
+publishDate: 2025-09-23 19:14
 tags:
-  - Java
+- Java
 heroImage:
   { src: 'https://5a352de.webp.li/2025/10/ced005057451dbb6c28e2a74904dde77.png', inferSize: true }
 ---
