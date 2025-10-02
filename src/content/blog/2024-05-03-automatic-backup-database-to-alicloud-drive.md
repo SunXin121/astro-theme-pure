@@ -7,7 +7,7 @@ tags:
 - 服务器
 - 数据库
 heroImage:
-  { src: '', inferSize: true }
+  { src: 'http://wallpaper.csun.site/?aliyun', inferSize: true }
 ---
 
 为了保证数据不丢失，需要定时备份数据，但是如果仅仅是将数据库备份到服务器本地，万一服务器数据损坏，依然无法恢复数据库，本文介绍一种将数据库备份到阿里云盘的方法，保障数据不会丢失。

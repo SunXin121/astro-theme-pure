@@ -5,6 +5,8 @@ publishDate: 2024-05-16 16:49
 tags:
 - 技巧
 - word
+heroImage:
+  { src: 'http://wallpaper.csun.site/?word', inferSize: true }
 ---
 
 最近忙着写论文，苦于图表一旦有所增加或删除就要全部重新编号，就研究了下 Word 怎么对图表进行自动编号。

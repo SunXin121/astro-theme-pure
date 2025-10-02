@@ -6,7 +6,7 @@ tags:
 - vercel
 - 工具
 heroImage:
-  { src: '', inferSize: true }
+  { src: 'http://wallpaper.csun.site/?mextra', inferSize: true }
 ---
 
 Nextra 是 Next.js 上的一个框架，可构建以内容为重点的网站。它拥有 Next.js 的所有强大功能，还能轻松创建基于 Markdown 的内容。Nextra Docs Theme 是一款包含几乎所有现代文档网站所需内容的主题，包括顶部导航栏、搜索栏、页面侧边栏、TOC 侧边栏和其他内置组件等，使用 Nextra + vercel 可以轻松搭建起一个文档站。

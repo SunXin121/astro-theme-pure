@@ -5,6 +5,8 @@ publishDate: 2024-05-11 10:28
 tags:
 - 工具
 - vercel
+heroImage:
+  { src: 'http://wallpaper.csun.site/?umami', inferSize: true }
 ---
 
 [Umami](https://umami.is/) 是一款开源网站统计工具，可以通过插入一行前端代码来实现网站访问量统计。

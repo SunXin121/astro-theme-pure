@@ -6,7 +6,7 @@ tags:
 - ios
 - 工具
 heroImage:
-  { src: '', inferSize: true }
+  { src: 'http://wallpaper.csun.site/?jumo', inferSize: true }
 ---
 
 众所周知，安卓可以通过下载 `.apk` 文件来安卓应用，但是 ios 由于安全不允许随意安装软件，只能通过 App Store 下载和安装应用。如果想要像安卓一样通过 `.ipa` 文件安装软件，则需要进行签名，但是个人签名只能维持 7 天，而企业签名价格昂贵且容易掉签。
