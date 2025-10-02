@@ -5,16 +5,76 @@
       "desc": "Common links included in circle friends",
       "link_list": [
         {
-          "name": "Arthals' ink",
-          "intro": "所见高山远木，阔云流风；所幸岁月盈余，了无拘束",
-          "link": "https://arthals.ink/",
-          "avatar": "https://cdn.arthals.ink/Arthals.png"
+          "name": "安知鱼",
+          "intro": "生活明朗，万物可爱",
+          "link": "https://blog.anheyu.com/",
+          "avatar": "https://npm.elemecdn.com/anzhiyu-blog-static@1.0.4/img/avatar.jpg"
         },
         {
-          "name": "CWorld Site",
-          "intro": "求知若愚，虚怀若谷",
-          "link": "https://cworld0.com/",
-          "avatar": "https://cravatar.cn/avatar/1ffe42aa45a6b1444a786b1f32dfa8aa?s=200"
+          "name": "Amon's Blog",
+          "intro": "一个有趣、好奇、爱开脑洞、喜欢挑战的人，懂技术懂产品的 3x Engineer",
+          "link": "https://amonxu.com/",
+          "avatar": "https://cdn.v2ex.com/avatar/8889/ba40/60889_large.png?m=1715867559"
+        },
+        {
+          "name": "Xiaodong's Blog",
+          "intro": "林晓东的个人博客",
+          "link": "https://blog.linxiaodong.com/",
+          "avatar": "https://blog.linxiaodong.com/static/favicons/favicon-32x32.png"
+        },
+        {
+          "name": "槐月初叁",
+          "intro": "槐月初叁的个人博客",
+          "link": "https://huaiyuechusan.github.io/",
+          "avatar": "https://huaiyuechusan.github.io/img/config_img/%E9%98%B3%E5%85%89%E5%B0%8F%E7%8C%AB.jpg"
+        },
+        {
+          "name": "Ating Life",
+          "intro": "Ating Life",
+          "link": "https://blog.wrihope.top/",
+          "avatar": "https://blog.wrihope.top/_image?href=%2F_astro%2Favatar.DZ1VDsxW.png&w=1080&h=1080&f=webp"
+        },
+        {
+          "name": "传家宝 vps",
+          "intro": "传家宝 vps",
+          "link": "https://www.legacyvps.com/",
+          "avatar": "https://www.legacyvps.com/upload/IMG_3478.png"
+        },
+        {
+          "name": "MJ's Blog",
+          "intro": "MJ's Blog",
+          "link": "https://kpahead.cn/",
+          "avatar": "https://kpahead.cn/upload/favicon.ico"
+        },
+        {
+          "name": "焕昭君",
+          "intro": "知行合一，日拱一卒",
+          "link": "https://blog.huan666.de/",
+          "avatar": "https://blog.huan666.de/img/author.webp"
+        },
+        {
+          "name": "CC的博客",
+          "intro": "我们永不消逝！",
+          "link": "https://main.791197.xyz/",
+          "avatar": "https://main.791197.xyz/upload/college-insignia.webp"
+        },
+        {
+          "name": "张苹果",
+          "intro": "这个人很简单，没什么好说的。",
+          "link": "https://zhangpingguo.com",
+          "avatar": "https://zhangpingguo.com/logo.jpg"
+        },
+        {
+          "name": "口袋分享记",
+          "intro": "所谓过往，皆为序章。虚室生白️",
+          "link": "https://111620.xyz/",
+          "avatar": "https://img.111620.xyz/2025/07/29/6887b5efbf768.png"
+        },
+        {
+          "name": "志夏の小破站",
+          "intro": "一个二次元技术宅",
+          "link": "https://bok.zhixiaxia.top/",
+          "avatar": "https://zhixiaxia.top/touxiang.jpg"
         }
       ]
     },
