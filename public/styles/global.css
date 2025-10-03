@@ -67,6 +67,9 @@ span.katex-display {
     overflow-x: scroll;
 
     & code {
+
+      font-family: 'Maple Mono' !important;
+
       display: block;
       width: fit-content;
       min-width: 100%;
