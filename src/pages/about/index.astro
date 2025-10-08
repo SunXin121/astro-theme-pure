@@ -1,14 +1,21 @@
 ---
-import { Button, Card, Collapse, Spoiler, Timeline } from 'astro-pure/user'
+import { Button, Collapse, Spoiler, Timeline } from 'astro-pure/user'
 import PageLayout from '@/layouts/CommonPage.astro'
+import Card from '@/components/pages/Card.astro'
 import Substats from '@/components/about/Substats.astro'
 import ToolSection from '@/components/about/ToolSection.astro'
 import Section from '@/components/home/Section.astro'
 import SkillLayout from '@/components/home/SkillLayout.astro'
+
+const headings = [
+  { depth: 2, slug: 'education', text: 'Education' },
+  { depth: 2, slug: 'social-networks', text: 'Social Networks' },
+  { depth: 2, slug: 'skills', text: 'Skills' }
+]
 ---
 
 
-<PageLayout title='About' comment>
+<PageLayout title='About' {headings} comment>
   <p>Hey 👋, I'm Sun Xin</p>
   <p>嗨，你好，我是 Sun Xin，六朝古都研究生在读</p>
   <p>一枚热爱编程、摄影、读书的 ITer，希望能成为一名优秀的开发者。</p>
@@ -22,6 +29,7 @@ import SkillLayout from '@/components/home/SkillLayout.astro'
       subheading='计算机技术'
       date='September 2024 - Present'
       href='https://www.njust.edu.cn/'
+      emblemSrc="https://upload.wikimedia.org/wikipedia/zh/thumb/f/f7/Nust.svg/250px-Nust.svg.png"
     />
     <br/>
     <Card
@@ -30,6 +38,7 @@ import SkillLayout from '@/components/home/SkillLayout.astro'
       subheading='软件工程'
       date='September 2020 - July 2024'
       href='https://www.ncu.edu.cn/'
+      emblemSrc="https://upload.wikimedia.org/wikipedia/zh/thumb/2/2f/Nanchang_University_logo.svg/1200px-Nanchang_University_logo.svg.png"
     />
 
   {/* social-networks */}
@@ -57,7 +66,7 @@ import SkillLayout from '@/components/home/SkillLayout.astro'
     ]}
   />
 
-  <h2 id='tools'>Skills</h2>
+  <h2 id='skills'>Skills</h2>
   <p>技术栈</p>
   <ToolSection
     class='mb-5'

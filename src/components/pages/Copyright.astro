@@ -1,0 +1,166 @@
+---
+import type { CollectionKey, InferEntrySchema } from 'astro:content'
+import config from '@/site-config'
+
+import { cn } from 'astro-pure/utils'
+import { QRCode } from 'astro-pure/advanced'
+import { Icon } from 'astro-pure/user'
+
+interface Props<T extends CollectionKey> {
+  data: InferEntrySchema<T>
+  class?: string
+}
+
+const {
+  data: { heroImage, title, publishDate },
+  class: className
+} = Astro.props
+
+// 本地日期格式化函数，避免使用有 virtual:config 依赖的 getFormattedDate
+const formatDate = (date: Date) => {
+  return date.toLocaleDateString(config.locale.dateLocale, {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  })
+}
+
+const image = typeof heroImage?.src === 'string' ? heroImage?.src : (heroImage?.src?.src ?? '')
+
+const shares = {
+  weibo: {
+    link: `http://service.weibo.com/share/share.php?url=${Astro.url}&title=${title}&pic=${image}`
+  },
+  x: {
+    link: `https://x.com/intent/tweet?text='${title}'&url='${Astro.url}'&via='${config.author}'`
+  },
+  bluesky: {
+    link: `https://bsky.app/intent/compose?text=${title}%0A${Astro.url}`
+  }
+} as const
+---
+
+<div
+  class={cn(
+    'relative flex flex-col gap-y-2 rounded-xl border px-3 sm:px-4 py-2 sm:py-3',
+    className
+  )}
+>
+  <Icon class='absolute end-4 top-4 size-20 opacity-10' name='copyright' />
+
+  {/* title & link */}
+  <div class='flex flex-col'>
+    <div class='font-medium text-foreground'>{title}</div>
+    <div class='text-sm'>{Astro.url}</div>
+  </div>
+
+  {/* common info */}
+  <div class='flex flex-row flex-wrap justify-start gap-x-5 gap-y-1 sm:gap-x-8'>
+    <div class='flex gap-x-2 sm:flex-col'>
+      <span>Author</span>
+      <span class='text-sm text-foreground max-sm:place-self-center'>{config.author}</span>
+    </div>
+    {
+      publishDate && (
+        <div class='flex gap-x-2 sm:min-w-16 sm:flex-col'>
+          <span>Published at</span>
+          <span class='text-sm text-foreground max-sm:place-self-center'>
+            {formatDate(publishDate)}
+          </span>
+        </div>
+      )
+    }
+    <div class='flex gap-x-2 sm:flex-col'>
+      <span>Copyright</span>
+      <a
+        class='text-sm text-foreground max-sm:place-self-center'
+        href='https://creativecommons.org/licenses/by/4.0/'
+        target='_blank'
+      >
+        CC BY-NC-SA 4.0
+      </a>
+    </div>
+  </div>
+
+  {/* functions */}
+  <div class='relative'>
+    <div class='flex flex-row gap-3'>
+      <button
+        id='copy-link'
+        class='group rounded-full bg-muted p-1 text-muted-foreground transition-colors hover:text-primary sm:p-1.5'
+      >
+        <Icon class='size-5' name='link' />
+      </button>
+      <button
+        id='get-qrcode'
+        class='group rounded-full bg-muted p-1 text-muted-foreground transition-colors hover:text-primary sm:p-1.5'
+      >
+        <Icon class='size-5' name='qrcode' />
+      </button>
+      {
+        config.content?.share?.map((share: string) => (
+          <a
+            href={shares[share as keyof typeof shares]?.link}
+            target='_blank'
+            id={`share-${share}`}
+            class='group rounded-full bg-muted p-1 text-muted-foreground transition-colors hover:text-primary sm:p-1.5'
+          >
+            <Icon class='size-5' name={share as any} />
+          </a>
+        ))
+      }
+    </div>
+    <QRCode
+      class='absolute z-10 -mt-2 box-content max-h-0 max-w-44 overflow-hidden rounded-xl border bg-muted p-4 opacity-0 transition-all duration-300 ease-in-out'
+    />
+  </div>
+</div>
+
+<style>
+  #qrcode-container.expanded {
+    max-height: 11rem;
+    transform: translateY(4px);
+    opacity: 100;
+  }
+</style>
+
+<script>
+  // 简单的提示函数，避免使用有依赖问题的 showToast
+  const showMessage = (message: string) => {
+    // 创建一个简单的提示
+    const toast = document.createElement('div')
+    toast.textContent = message
+    toast.style.cssText = `
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--color-primary, #333);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 6px;
+      z-index: 1000;
+      font-size: 14px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: opacity 0.3s ease;
+    `
+    document.body.appendChild(toast)
+    
+    // 3秒后移除
+    setTimeout(() => {
+      toast.style.opacity = '0'
+      setTimeout(() => document.body.removeChild(toast), 300)
+    }, 3000)
+  }
+
+  // Copy link
+  const copyLink = document.getElementById('copy-link')
+  copyLink?.addEventListener('click', () => {
+    navigator.clipboard.writeText(window.location.href)
+    showMessage('Link copied!')
+  })
+
+  // QRCode
+  const getQRCode = document.getElementById('get-qrcode')
+  const qrcodeContainer = document.getElementById('qrcode-container')
+  getQRCode?.addEventListener('click', () => qrcodeContainer?.classList.toggle('expanded'))
+</script>
