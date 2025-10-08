@@ -1,20 +1,178 @@
 ---
-import { Button, Collapse, Spoiler, Timeline } from 'astro-pure/user'
+import { Button, Card, Collapse, Spoiler, Timeline } from 'astro-pure/user'
 import PageLayout from '@/layouts/CommonPage.astro'
 import Substats from '@/components/about/Substats.astro'
 import ToolSection from '@/components/about/ToolSection.astro'
-
+import Section from '@/components/home/Section.astro'
+import SkillLayout from '@/components/home/SkillLayout.astro'
 ---
 
-<PageLayout title='About' {} comment>
+
+<PageLayout title='About' comment>
   <p>Hey 👋, I'm Sun Xin</p>
+  <p>嗨，你好，我是 Sun Xin，六朝古都研究生在读</p>
+  <p>一枚热爱编程、摄影、读书的 ITer，希望能成为一名优秀的开发者。</p>
+  <p>只有走在路上，才能摆脱局限，摆脱执着，让所有的选择、探寻、猜测、想象都生气勃勃。</p>
+  {/* education */}
+  <h2 id='education'>Education</h2>
+  <p>一些求学经历：</p>
+    <Card
+      as='a'
+      heading='南京理工大学'
+      subheading='计算机技术'
+      date='September 2024 - Present'
+      href='https://www.njust.edu.cn/'
+    />
+    <br/>
+    <Card
+      as='a'
+      heading='南昌大学'
+      subheading='软件工程'
+      date='September 2020 - July 2024'
+      href='https://www.ncu.edu.cn/'
+    />
+
+  {/* social-networks */}
+  <h2 id='social-networks'>Social Networks</h2>
   <p>
-    嗨，你好，我是 Sun Xin，六朝古都研究生在读
+    可以通过以下方式找到我：
   </p>
-  <p>
-    一枚热爱编程、摄影、读书的 ITer，希望能成为一名优秀的开发者。
-  </p>
-  <p>
-    只有走在路上，才能摆脱局限，摆脱执着，让所有的选择、探寻、猜测、想象都生气勃勃。
-  </p>
+  <Substats
+    stats={[
+      {
+        platform: 'GitHub',
+        icon: 'github',
+        link: 'https://github.com/SunXin121'
+      },
+      {
+        platform: 'Email',
+        icon: 'email',
+        link: 'mailto:xinsun.cs@gmail.com'
+      },
+      {
+        platform: 'LINUX DO',
+        icon: 'https://linux.do/uploads/default/optimized/4X/6/a/6/6a6affc7b1ce8140279e959d32671304db06d5ab_2_512x512.png',
+        color: '#1da1f2',
+      }
+    ]}
+  />
+
+  <h2 id='tools'>Skills</h2>
+  <p>技术栈</p>
+  <ToolSection
+    class='mb-5'
+    title='Backend'
+    tools={[
+      {
+        name: 'Java',
+        description: 'Programming Language',
+        href: 'https://www.java.com/',
+        icon: import('@/assets/tools/java.svg?raw')
+      },
+      {
+        name: 'Spring Boot',
+        description: 'Backend Framework',
+        href: 'https://spring.io/projects/spring-boot',
+        icon: import('@/assets/tools/spring.svg?raw')
+      },
+      {
+        name: 'MySQL',
+        description: 'Database',
+        href: 'https://www.mysql.com/',
+        icon: import('@/assets/tools/mysql.svg?raw')
+      },
+      {
+        name: 'MyBatis',
+        description: 'Persistence Framework',
+        href: 'https://mybatis.org/mybatis-3/',
+        icon: import('@/assets/tools/mybatis.svg?raw')
+      },
+      {
+        name: 'Redis',
+        description: 'In-memory Data Store',
+        href: 'https://redis.io/',
+        icon: import('@/assets/tools/redis.svg?raw')
+      },
+      {
+        name: 'RabbitMQ',
+        description: 'Message Broker',
+        href: 'https://www.rabbitmq.com/',
+        icon: import('@/assets/tools/rabbitmq.svg?raw')
+      }
+    ]}
+  />
+
+  <ToolSection
+    class='mb-5'
+    title='Frontend'
+    tools={[
+      {
+        name: 'HTML',
+        description: 'Markup Language',
+        href: 'https://www.w3.org/html/',
+        icon: import('@/assets/tools/html.svg?raw')
+      },
+      {
+        name: 'CSS',
+        description: 'Style Sheet Language',
+        href: 'https://www.w3.org/Style/CSS/',
+        icon: import('@/assets/tools/css.svg?raw')
+      },
+      {
+        name: 'JavaScript',
+        description: 'Programming Language',
+        href: 'https://www.javascript.com/',
+        icon: import('@/assets/tools/js.svg?raw')
+      },
+      {
+        name: 'Vue.js',
+        description: 'JavaScript Framework',
+        href: 'https://vuejs.org/',
+        icon: import('@/assets/tools/vue.svg?raw')
+      }
+    ]}
+  />
+
+  <ToolSection
+    class='mb-5'
+    title='Tools'
+    tools={[
+      {
+        name: 'Git',
+        description: 'Version Control System',
+        href: 'https://git-scm.com/',
+        icon: import('@/assets/tools/git.svg?raw')
+      },
+      {
+        name: 'Docker',
+        description: 'Containerization Platform',
+        href: 'https://www.docker.com/',
+        icon: import('@/assets/tools/docker.svg?raw')
+      },
+      {
+        name: 'Ubuntu',
+        description: 'Operating System',
+        href: 'https://ubuntu.com/',
+        icon: import('@/assets/tools/ubuntu.svg?raw')
+      },
+      {
+        name: 'IDEA',
+        description: 'Code Editor',
+        href: 'https://www.jetbrains.com/idea/',
+        icon: import('@/assets/tools/idea.svg?raw')
+      },
+      {
+        name: 'VSCode',
+        description: 'Code Editor',
+        href: 'https://code.visualstudio.com/',
+        icon: import('@/assets/tools/vscode.svg?raw')
+      },
+      {
+        name: 'Nginx',
+        description: 'Web Server',
+        href: 'https://www.nginx.com/',
+        icon: import('@/assets/tools/nginx.svg?raw')
+      }
+    ]}
+  />
 </PageLayout>
