@@ -6,7 +6,7 @@ tags:
 - 图像分割
 - 深度学习
 heroImage:
-  { src: 'https://5a352de.webp.li/2024/10/205228337ae988aced27c9cd65f551a5.png', inferSize: true }
+  { src: 'http://wallpaper.csun.site/?rcm', inferSize: true }
 ---
 
 > 论文：[https://arxiv.org/pdf/2405.06228](https://arxiv.org/pdf/2405.06228)

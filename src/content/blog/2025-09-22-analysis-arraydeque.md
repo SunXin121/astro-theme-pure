@@ -5,7 +5,7 @@ publishDate: 2025-09-22 17:14
 tags:
 - Java
 heroImage:
-  { src: 'https://5a352de.webp.li/2025/10/16a0a41d4a62ff671489a16087e1b2e3.png', inferSize: true }
+  { src: 'http://wallpaper.csun.site/?arrayDeque', inferSize: true }
 ---
 
 除了 `LinkedList`，Java 容器类中还有一个双端队列的实现类 `ArrayDeque`，它是基于数组实现的。一般而言，由于需要移动元素，数组的插入和删除效率比较低，但 `ArrayDeque` 的效率却非常高。

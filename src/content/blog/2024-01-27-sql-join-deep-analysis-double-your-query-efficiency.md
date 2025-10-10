@@ -6,7 +6,7 @@ tags:
 - MySQL
 - 数据库
 heroImage:
-  { src: 'https://5a352de.webp.li/2025/10/9919f9c63324359678fa4cb2d97ad91a.png', inferSize: true }
+  { src: 'http://wallpaper.csun.site/?sqljoin', inferSize: true }
 ---
 
 SQL中的 `JOIN` 操作是根据两个或多个表之间的相关列将它们合并在一起的查询操作，能够大大提高查询效率，本文将对常用的几种 `JOIN` 操作进行深度解析。

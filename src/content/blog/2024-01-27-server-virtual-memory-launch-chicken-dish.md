@@ -6,7 +6,7 @@ tags:
 - 服务器
 - 技巧
 heroImage:
-  { src: 'https://5a352de.webp.li/2025/10/dea294ebbff6220578d12e5c603de06a.png', inferSize: true }
+  { src: 'http://wallpaper.csun.site/?server', inferSize: true }
 ---
 
 服务器的内存资源是十分昂贵的，我们在使用服务器运行程序时，经常遇到内存不足，运行崩溃的情况。为了减少购买昂贵的内存资源，又能流畅的运行程序，可以使用**虚拟内存**来代替。

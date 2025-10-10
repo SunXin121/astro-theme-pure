@@ -72,7 +72,6 @@ public class Main {
 
 而每个线程的本地变量并不是直接存放在 `ThreadLocal` 实例中，而是存放在调用线程自身的 `threadLocals` 里。该 Map 的 key 是 `ThreadLocal` 实例（更准确地说是对它的弱引用），value 是线程本地变量的值。
 
-> @tip
 >
 > `ThreadLocal` 更像一个「工具壳」：通过 `set()` 把 `value` 放入当前线程的 `threadLocals`，通过 `get()` 再取出来。只要线程还活着，本地变量就会跟着线程存在。所以一旦不再需要该变量，应尽早 `remove()`，特别是在「线程池」场景中，线程会被复用，泄漏风险更高。
 >

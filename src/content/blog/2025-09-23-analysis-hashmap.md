@@ -5,7 +5,7 @@ publishDate: 2025-09-23 19:14
 tags:
 - Java
 heroImage:
-  { src: 'https://5a352de.webp.li/2025/10/ced005057451dbb6c28e2a74904dde77.png', inferSize: true }
+  { src: 'http://wallpaper.csun.site/?hashMap', inferSize: true }
 ---
 
 `HashMap` 是一个键值对存储结构，通过一个「键」（Key）可以快速地查找到对应的「值」（Value）

@@ -6,7 +6,7 @@ tags:
 - 数据库
 - 服务器
 heroImage:
-  { src: 'https://5a352de.webp.li/2025/10/8582028cf99619fdeb3306361bb4ff92.png', inferSize: true }
+  { src: 'http://wallpaper.csun.site/?mysql', inferSize: true }
 ---
 
 我们在项目开发过程中，不可避免会使用到数据库，如果数据库部署在本地，当项目在别的机器上启动时就不能访问原来的数据库了，这对我们的开发带来了极大的不便，所以通常会将数据库部署在远程服务器上，便于在不同机器上都能访问数据库。
