@@ -95,7 +95,7 @@ const typographyConfig = {
     // Inline code
     ...(typographyCustom.inlineCodeBlockStyle === 'modern' && {
       ':not(pre) > code': {
-        // 'font-family': 'Maple Mono',
+        'font-family': 'JetBrains Mono',
         'font-size': '0.75em',
         padding: '0.3em 0.5em',
         border: '1px solid hsl(var(--border) / 1)',
