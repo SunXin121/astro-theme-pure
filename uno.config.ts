@@ -205,14 +205,18 @@ const rules: Rule<object>[] = [
 
 export default defineConfig({
   presets: [
-    presetMini(), // required
+    presetMini(),
     presetTypography(typographyConfig)
   ],
   rules,
   theme: {
-    colors: themeColors
+    colors: themeColors,
+    fontFamily: {
+      mono: [
+        'JetBrains Mono'
+      ]
+    }
   },
-  // https://unocss.dev/guide/extracting#limitations
   safelist: [
     // TOC
     'rounded-t-2xl',
