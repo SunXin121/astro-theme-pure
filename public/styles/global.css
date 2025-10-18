@@ -68,8 +68,6 @@ span.katex-display {
 
     & code {
 
-      font-family: 'JetBrains Mono' !important;
-
       display: block;
       width: fit-content;
       min-width: 100%;
