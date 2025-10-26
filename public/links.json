@@ -87,6 +87,12 @@
           "intro": "开发・分享・学习",
           "link": "https://www.emtips.net/",
           "avatar": "https://www.emtips.net/images/avatar2.jpg"
+        },
+        {
+          "name": "假维斯的博客",
+          "intro": "一个小站长的博客",
+          "link": "https://we1.top/",
+          "avatar": "https://we1.top/avatar.png"
         }
       ]
     }
