@@ -25,7 +25,7 @@ const linkEditPage = 'https://github.com/SunXin121/astro-theme-pure/blob/main/pu
         const script = `navigator.clipboard.writeText('${val}');document.dispatchEvent(new CustomEvent('toast',{detail:{message:'Copied "${val}" to clipboard!'}}))`
         return (
           <>
-            <span class='text-end'>{name}:</span>
+            <span class='text-justify'>{name}:</span>
             <samp class='cursor-pointer' onclick={script}>
               {val}
             </samp>
