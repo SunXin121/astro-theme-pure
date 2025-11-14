@@ -53,7 +53,7 @@ Sun API 是一个低价的 gpt 中转 API，支持 gpt3.5 gpt4 Claude3 全系列
 ![image.png](https://p1.meituan.net/csc/171bad7e9265c4256bd7b74fe7ff4bcc12790.png)
 
 
-## 如何使用
+## 如何使用 API
 使用与官方类似，首先需要获取 api key，即令牌，前往[令牌](https://api.csun.site/console/token)页面，点击添加令牌。
 ![image.png](https://p1.meituan.net/csc/d226b9872fffa4a1895b8e28ed51078534693.png)
 设置好令牌名称、过期时间、令牌额度，点击提交即可。
@@ -169,42 +169,124 @@ chat_completion = client.chat.completions.create(
 print(chat_completion)
 ```
 
-## 常见问题
-### 为什么 gpt-4 额度消耗这么快
+## Claude Code 教程
+### 安装 Node.js
 
-gpt-4 的消耗速度是 gpt-3.5-turbo 的 20 到 40 倍，假设购买了 9w token，我们用 15 倍作为平均倍率，也就是 90000 / 15 = 6000 字左右，加上每次要附带上历史消息，能发的消息数将会进一步减半，在最极限的情况下，一条消息就能把 9w token 消耗完。
+1. 访问 [https://nodejs.org](https://nodejs.org/)
+2. 下载 LTS 版本的 Windows Installer (.msi)
+3. 运行安装程序，按默认设置完成安装
+4. 安装程序会自动添加到 PATH 环境变量
 
-### 使用 Next Web 时，有哪些节省 token 的小技巧
+### 安装 Claude Code CLI
 
-- 点开对话框上方的设置按钮，找到里面的设置项：
-    - 携带历史消息数：数量越少，消耗 token 越少，但同时 gpt 会忘记之前的对话
-    - 历史摘要：用于记录长期话题，关闭后可以减少 token 消耗
-    - 注入系统级提示词：用于提升 ChatGPT 的回复质量，关闭后可减少 token 消耗
-- 点开左下角设置按钮，关闭自动生成标题，可以减少 token 消耗
-- 在对话时，点击对话框上方的机器人图标，可以快捷切换模型，可以优先使用 3.5 问答，如果回答不满意，再切换为 4.0 重新提问。
+以**管理员身份**打开 CMD 或 PowerShell，执行以下命令
 
-### 为什么GPT4不知道它自己是谁？
+```bash
+npm install -g @anthropic-ai/claude-code
+```
 
-直接问GPT4：”你是谁?““你是什么模型？”诸如此类问题，一般情况下GPT4的API也会回答自己是GPT3，估计是官方预置的原因。GPT4和3.5用的都是2021年之前的数据，那时候还没有GPT4。  
-官网和某些套壳不回答是GPT3，是因为他们提前预设了提示词，让GPT认为自己是别的模型了，这个可以通过问答所消耗的总token看出来，预设提示词是会消耗token的。  
-如果说你对比官网和API的回答，发现有所不一，那也很正常。一是因为，GPT4对同一个问题的每次回答都是不同的；二是，官网对GPT4的参数进行了一定的优化。
+验证安装
 
-### 为什么GPT4会给出这么弱智的回答，我还是觉得你们是假的GPT4？[​](https://doc.aihubmix.com/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98#%E4%B8%BA%E4%BB%80%E4%B9%88gpt4%E4%BC%9A%E7%BB%99%E5%87%BA%E8%BF%99%E4%B9%88%E5%BC%B1%E6%99%BA%E7%9A%84%E5%9B%9E%E7%AD%94%E6%88%91%E8%BF%98%E6%98%AF%E8%A7%89%E5%BE%97%E4%BD%A0%E4%BB%AC%E6%98%AF%E5%81%87%E7%9A%84gpt4 "Direct link to 为什么GPT4会给出这么弱智的回答，我还是觉得你们是假的GPT4？")
+```bash
+claude --version
+```
 
-GPT4也不是万能的，训练参数并不比GPT3大多少，不用因为营销号的宣传神话GPT4。而且由于中文语料在训练中的占比很小，在回答中文问题时，不排除在某些问题上表现不佳，同样的问题用英文问可能结果完全不一样，您可以试着用英文提问试试。  
-GPT4强在推理能力，从目前大家的使用体验中来看，写代码方面会比gpt3.5强很多，但仍然会给出胡编的答案。
+### 配置 API
 
-### 如何检验GPT3.5还是GPT4？[​](https://doc.aihubmix.com/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98#%E5%A6%82%E4%BD%95%E6%A3%80%E9%AA%8Cgpt35%E8%BF%98%E6%98%AFgpt4 "Direct link to 如何检验GPT3.5还是GPT4？")
+访问 [令牌管理](https://api.csun.site/console/token) 页面，点击添加令牌，**令牌分组选择** **`claude-code`**
 
-我们提供了一个简单的方法来验证您使用的是GPT3.5还是GPT4。以下是一些测试问题及 其不同模型的预期回答，您可以使用这些问题来测试。 测试问题：  
-* 昨天的当天的明天是哪天？GPT-3.5应答“昨天”，而GPT-4应答“今天”。 
-* 树上有9只鸟，猎人射杀了一只，还剩下多少只？GPT-3.5可能说“8只”，GPT-4会告诉你“0 只，其他的鸟都飞走了”。  
-* 为什么周树人要打鲁迅？GPT-3.5可能给出一个编造的答案，而GPT-4会指出“鲁迅”和”周树人"是同一个人。
+然后配置 claude 的环境变量，打开 `%USERPROFILE%\.claude\settings.json` 文件，添加以下配置
 
-### 为什么后台创建的令牌没有显示已用额度
+```json
+{
+  "env": {
+    "ANTHROPIC_AUTH_TOKEN": "添加的令牌",
+    "ANTHROPIC_BASE_URL": "https://api.csun.site/",
+    "API_TIMEOUT_MS": "600000",
+    "BASH_DEFAULT_TIMEOUT_MS": "600000",
+    "BASH_MAX_TIMEOUT_MS": "600000",
+    "MCP_TIMEOUT": "30000",
+    "MCP_TOOL_TIMEOUT": "600000",
+    "CLAUDE_API_TIMEOUT": "600000"
+  }
+}
+```
 
-当设置成无限额度后，不会更新已用额度，修改无限额度为有限额度即可
+### 启动 Claude Code
 
-### 无法登录
+配置完成后，先进入到工程目录，然后运行以下命令启动
 
-请确保用户名填写正确，不要填写邮箱地址，是填写你注册时候的用户名，如遇到登录问题无法自行解决，请联系客服，第一时间为您处理
+```bash
+claude
+```
+
+## Codex 教程
+
+### 安装 Node.js
+
+1. 访问 [https://nodejs.org](https://nodejs.org/)
+2. 下载 LTS 版本的 Windows Installer (.msi)
+3. 运行安装程序，按默认设置完成安装
+4. 安装程序会自动添加到 PATH 环境变量
+
+### 安装 CodeX CLI
+
+以**管理员身份**打开 CMD 或 PowerShell，执行以下命令
+
+```bash
+npm install -g @openai/codex@latest
+```
+
+**验证安装：**
+
+```bash
+codex --version
+```
+
+### 配置 API
+
+#### 获取令牌
+
+访问 [令牌管理](https://api.csun.site/console/token) 页面，点击添加令牌，**令牌分组选择** **`codex`**
+
+#### 创建配置文件夹
+
+在 `%USERPROFILE%` 目录下，创建 `.codex` 文件夹
+
+#### 创建配置文件
+
+**在 `.codex` 文件夹下创建创建 config.toml 文件：**
+
+
+
+```
+model_provider = "sunapi"
+model = "gpt-5.1-codex"
+model_reasoning_effort = "high"
+network_access = "enabled"
+disable_response_storage = true
+windows_wsl_setup_acknowledged = true
+
+[model_providers.sunapi]
+name = "sunapi"
+base_url = "https://api.csun.site/v1"
+wire_api = "responses"
+requires_openai_auth = true
+```
+
+**在同一目录下创建 auth.json 文件：**
+
+```
+{
+  "OPENAI_API_KEY": "粘贴为CodeX专用分组令牌key"
+}
+```
+
+### 启动 CodeX
+
+配置完成后，先进入到工程目录，然后运行以下命令启动
+
+```
+codex
+```
+
