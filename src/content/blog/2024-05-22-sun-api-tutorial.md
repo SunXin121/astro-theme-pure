@@ -193,7 +193,13 @@ claude --version
 
 ### 配置 API
 
-访问 [令牌管理](https://api.csun.site/console/token) 页面，点击添加令牌，**令牌分组选择** **`claude-code`**
+访问 [令牌管理](https://api.csun.site/console/token) 页面，点击添加令牌，**令牌分组选择** **`claude-code` 或 `az-cc`**
+
+> `claude-code` 分组来自官方的 claude code max 账号，更稳定速度更快但是价格稍贵，1.6 元 = 1 美元额度
+>
+> `az-cc` 分组来自 azure 的 claude code 渠道，速度略慢，但是价格便宜，0.8 元 = 1 美元额度
+>
+> 两者都是满血，都支持缓存，按需选择
 
 然后配置 claude 的环境变量，打开 `%USERPROFILE%\.claude\settings.json` 文件，添加以下配置
 
