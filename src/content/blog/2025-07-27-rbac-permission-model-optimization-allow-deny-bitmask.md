@@ -41,7 +41,7 @@ RBAC（Role-Based Access Control，基于角色的访问控制）是一种通过
 User  <--->  User_Role  <--->  Role  <--->  Role_Permission  <--->  Permission
 ```
 
-###  /用户目录/swap/swapfile swap swap defaults 0 0shell
+###  优缺点
 
 RBAC 模型的优点是权限分配清晰、管理结构规范，维护成本较低且用户与权限解耦
 
