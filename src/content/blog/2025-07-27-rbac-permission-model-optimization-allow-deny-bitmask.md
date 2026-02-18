@@ -1,6 +1,6 @@
 ---
-title: 基于 RBAC 的权限模型优化实践：引入用户级 Allow/Deny 与 Bitmask 位运算鉴权
-description: 传统 RBAC（Role-Based Access Control）模型在企业系统中被广泛应用，但在复杂业务场景下容易出现 「角色爆炸」问题。本文在经典 RBAC 的基础上，引入 用户级 Allow / Deny 覆盖机制，并结合 Bitmask 位掩码优化权限存储与鉴权性能，实现 API 级细粒度控制，满足多业务线、复杂授权场景下的权限管理需求。
+title: 基于 RBAC 的权限模型优化实践
+description: 本文在经典 RBAC 的基础上，引入 用户级 Allow/Deny 覆盖机制，并结合 Bitmask 位掩码优化权限存储与鉴权性能，实现 API 级细粒度控制，满足多业务线、复杂授权场景下的权限管理需求。
 publishDate: 2025-07-27 23:14:12
 tags:
 - Java
@@ -41,7 +41,7 @@ RBAC（Role-Based Access Control，基于角色的访问控制）是一种通过
 User  <--->  User_Role  <--->  Role  <--->  Role_Permission  <--->  Permission
 ```
 
-### 优缺点分析
+###  /用户目录/swap/swapfile swap swap defaults 0 0shell
 
 RBAC 模型的优点是权限分配清晰、管理结构规范，维护成本较低且用户与权限解耦
 
