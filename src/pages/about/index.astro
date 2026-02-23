@@ -1,16 +1,31 @@
 ---
-import { Button, Collapse, Spoiler, Timeline } from 'astro-pure/user'
+import { Image } from 'astro:assets'
 import PageLayout from '@/layouts/CommonPage.astro'
-import Card from '@/components/pages/Card.astro'
 import Substats from '@/components/about/Substats.astro'
 import ToolSection from '@/components/about/ToolSection.astro'
-import Section from '@/components/home/Section.astro'
-import SkillLayout from '@/components/home/SkillLayout.astro'
 
 const headings = [
   { depth: 2, slug: 'education', text: 'Education' },
   { depth: 2, slug: 'social-networks', text: 'Social Networks' },
   { depth: 2, slug: 'skills', text: 'Skills' }
+]
+
+const educationList = [
+  {
+    name: '南京理工大学',
+    major: '计算机技术',
+    date: 'September 2024 - Present',
+    link: 'https://www.njust.edu.cn/',
+    emblem: 'https://upload.wikimedia.org/wikipedia/zh/thumb/f/f7/Nust.svg/250px-Nust.svg.png'
+  },
+  {
+    name: '南昌大学',
+    major: '软件工程',
+    date: 'September 2020 - July 2024',
+    link: 'https://www.ncu.edu.cn/',
+    emblem:
+      'https://upload.wikimedia.org/wikipedia/zh/thumb/6/6f/Nanchang_University_logo.png/250px-Nanchang_University_logo.png'
+  }
 ]
 ---
 
@@ -23,23 +38,76 @@ const headings = [
   {/* education */}
   <h2 id='education'>Education</h2>
   <p>一些求学经历：</p>
-    <Card
-      as='a'
-      heading='南京理工大学'
-      subheading='计算机技术'
-      date='September 2024 - Present'
-      href='https://www.njust.edu.cn/'
-      emblemSrc="https://upload.wikimedia.org/wikipedia/zh/thumb/f/f7/Nust.svg/250px-Nust.svg.png"
-    />
-    <br/>
-    <Card
-      as='a'
-      heading='南昌大学'
-      subheading='软件工程'
-      date='September 2020 - July 2024'
-      href='https://www.ncu.edu.cn/'
-      emblemSrc="https://upload.wikimedia.org/wikipedia/zh/thumb/6/6f/Nanchang_University_logo.png/250px-Nanchang_University_logo.png"
-    />
+  <div class='grid gap-3.5 sm:grid-cols-2 sm:gap-4'>
+    {educationList.map((edu) => (
+      <a href={edu.link} target='_blank' rel='noreferrer' class='no-underline'>
+        <div class='group relative h-full overflow-hidden rounded-2xl border bg-background px-2.5 py-1.5 transition-colors hover:bg-muted sm:px-4 sm:py-2'>
+          <div class='relative z-10 flex h-full items-center gap-3'>
+            {/* emblem */}
+            <div class='relative h-14 w-14 min-w-14 overflow-hidden rounded-full'>
+              <Image
+                class='my-0 bg-white'
+                src={edu.emblem}
+                height={80}
+                width={80}
+                alt={`${edu.name} emblem`}
+                loading='lazy'
+              />
+              <div class='absolute start-0 top-0 h-full w-full'>
+                <div class='flex h-full w-full items-center justify-center rounded-full bg-foreground opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-50'>
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='32'
+                    height='32'
+                    viewBox='0 0 24 24'
+                    fill='none'
+                    stroke-width='2.5'
+                    stroke-linecap='round'
+                    stroke-linejoin='round'
+                    class='me-2 stroke-background'
+                  >
+                    <line
+                      x1='5'
+                      y1='12'
+                      x2='19'
+                      y2='12'
+                      class='translate-x-4 scale-x-0 transition-all duration-300 ease-in-out group-hover:translate-x-1 group-hover:scale-x-100'
+                    />
+                    <polyline
+                      points='12 5 19 12 12 19'
+                      class='translate-x-0 transition-all duration-300 ease-in-out group-hover:translate-x-1'
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+            {/* details */}
+            <div class='flex flex-col gap-y-1'>
+              <p class='my-0 line-clamp-1 text-sm'>{edu.name}</p>
+              <p class='my-0 line-clamp-1 text-xs text-muted-foreground'>{edu.major}</p>
+              <p class='my-0 line-clamp-1 text-xs text-muted-foreground'>{edu.date}</p>
+            </div>
+          </div>
+          {/* emblem bg */}
+          <Image
+            class='absolute -start-2 top-0 z-0 my-0 h-full w-2/3 bg-white object-cover opacity-15'
+            src={edu.emblem}
+            height={80}
+            width={80}
+            alt=''
+            loading='lazy'
+            style={{
+              maskImage: 'linear-gradient(to left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%)',
+              msMaskImage:
+                '-ms-linear-gradient(to left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%)',
+              WebkitMaskImage:
+                '-webkit-linear-gradient(to left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%)'
+            }}
+          />
+        </div>
+      </a>
+    ))}
+  </div>
 
   {/* social-networks */}
   <h2 id='social-networks'>Social Networks</h2>
@@ -181,6 +249,18 @@ const headings = [
         description: 'Web Server',
         href: 'https://www.nginx.com/',
         icon: import('@/assets/tools/nginx.svg?raw')
+      },
+      {
+        name: 'Claude Code',
+        description: 'Vibe coding',
+        href: 'https://code.claude.com/',
+        icon: import('@/assets/tools/cc.svg?raw')
+      },
+      {
+        name: 'Codex',
+        description: 'Vibe coding',
+        href: 'https://openai.com/zh-Hans-CN/codex/',
+        icon: import('@/assets/tools/codex.svg?raw')
       }
     ]}
   />
