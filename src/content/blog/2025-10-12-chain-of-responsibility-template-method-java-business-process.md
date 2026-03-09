@@ -1,11 +1,11 @@
 ---
-title: 责任链模式在业务流程中的应用——结合工厂模式与模板方法实现多节点解耦
+title: 责任链模式在业务流程中的应用
 description: 责任链模式在复杂业务流程中的应用
 publishDate: 2025-10-12 15:33
 tags:
 - java
 - 设计模式
-  heroImage:
+heroImage:
   { src: 'http://wallpaper.csun.site/?strategyChain', inferSize: true }
 ---
 
