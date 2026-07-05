@@ -1,0 +1,177 @@
+---
+import type { MarkdownHeading } from 'astro'
+
+import SmartTOCHeading, { type TocItem } from '@/components/toc/SmartTOCHeading.astro'
+
+interface Props {
+  headings: MarkdownHeading[]
+  class?: string
+  id?: string
+}
+
+const { headings, class: className, ...props } = Astro.props
+
+function diveChildren(item: TocItem, depth: number): TocItem[] {
+  if (depth === 1 || !item.subheadings.length) return item.subheadings
+  return diveChildren(item.subheadings[item.subheadings.length - 1] as TocItem, depth - 1)
+}
+
+function generateToc(headings: readonly MarkdownHeading[]) {
+  const bodyHeadings = [...headings.filter(({ depth }) => depth > 1)]
+  const toc: TocItem[] = []
+
+  bodyHeadings.forEach((h) => {
+    const heading: TocItem = { ...h, subheadings: [] }
+
+    if (heading.depth === 2) {
+      toc.push(heading)
+      return
+    }
+
+    const lastItemInToc = toc[toc.length - 1]
+    if (!lastItemInToc || heading.depth < lastItemInToc.depth) {
+      throw new Error(`Orphan heading found: ${heading.text}.`)
+    }
+
+    const target = diveChildren(lastItemInToc, heading.depth - lastItemInToc.depth)
+    target.push(heading)
+  })
+
+  return toc
+}
+
+const toc = generateToc(headings)
+---
+
+<smart-toc class={className} {...props}>
+  <h2 class='font-semibold'>TABLE OF CONTENTS</h2>
+  <ul class='mt-4 text-card-foreground'>
+    {toc.map((heading) => <SmartTOCHeading heading={heading} />)}
+  </ul>
+</smart-toc>
+
+<script>
+  class SmartTOC extends HTMLElement {
+    private headings: HTMLElement[] = []
+    private links: HTMLAnchorElement[] = []
+    private visibleSlugs = new Set<string>()
+    private clickedSlug = ''
+    private clickLockUntil = 0
+    private observer?: IntersectionObserver
+
+    connectedCallback() {
+      this.headings = Array.from(
+        document.querySelectorAll<HTMLElement>('article h2, article h3, article h4, article h5, article h6')
+      ).filter((heading) => !!heading.id)
+      this.links = Array.from(this.querySelectorAll<HTMLAnchorElement>('a[data-toc-link]'))
+
+      this.links.forEach((link) => {
+        link.addEventListener('click', (event) => {
+          event.preventDefault()
+
+          const slug = link.dataset.tocLink || ''
+          const heading = document.getElementById(slug)
+          if (!heading) return
+
+          this.clickedSlug = slug
+          this.clickLockUntil = Date.now() + 900
+          this.setActive(slug)
+          history.pushState(null, heading.textContent || '', `#${slug}`)
+          heading.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        })
+      })
+
+      this.observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            const slug = (entry.target as HTMLElement).id
+            if (entry.isIntersecting) {
+              this.visibleSlugs.add(slug)
+            } else {
+              this.visibleSlugs.delete(slug)
+            }
+          })
+          this.updateActive()
+        },
+        { rootMargin: '0px 0px 0px 0px', threshold: 0 }
+      )
+
+      this.headings.forEach((heading) => this.observer?.observe(heading))
+      window.addEventListener('scroll', this.updateActive, { passive: true })
+      window.addEventListener('hashchange', this.activateHash)
+
+      this.activateHash()
+      if (!window.location.hash) this.updateActive()
+    }
+
+    disconnectedCallback() {
+      this.observer?.disconnect()
+      window.removeEventListener('scroll', this.updateActive)
+      window.removeEventListener('hashchange', this.activateHash)
+    }
+
+    private activateHash = () => {
+      const slug = decodeURIComponent(window.location.hash.replace(/^#/, ''))
+      if (!slug) return
+      this.clickedSlug = slug
+      this.clickLockUntil = Date.now() + 900
+      this.setActive(slug)
+    }
+
+    private updateActive = () => {
+      if (Date.now() < this.clickLockUntil && this.clickedSlug) {
+        this.setActive(this.clickedSlug)
+        return
+      }
+
+      const firstVisible = this.headings.find((heading) => this.visibleSlugs.has(heading.id))
+      if (firstVisible) {
+        this.setActive(firstVisible.id)
+        return
+      }
+
+      const viewportTop = window.scrollY
+      const current = [...this.headings].reverse().find((heading) => heading.offsetTop <= viewportTop + 96)
+      this.setActive(current?.id || this.headings[0]?.id || '')
+    }
+
+    private setActive(slug: string) {
+      this.links.forEach((link) => {
+        const isActive = link.dataset.tocLink === slug
+        const progressBar = this.querySelector<HTMLElement>(
+          `[data-toc-progress="${CSS.escape(link.dataset.tocLink || '')}"]`
+        )
+
+        link.classList.toggle('highlight', isActive)
+        link.classList.toggle('highlight-bg-translucent', isActive)
+        link.classList.toggle('rounded-2xl', isActive)
+        link.classList.toggle('font-medium', isActive)
+        link.classList.toggle('text-primary', isActive)
+        if (isActive) {
+          link.setAttribute('aria-current', 'location')
+        } else {
+          link.removeAttribute('aria-current')
+        }
+
+        progressBar?.classList.toggle('highlight-bg', isActive)
+        progressBar?.style.setProperty('height', isActive ? '90%' : '0%')
+      })
+    }
+  }
+
+  if (!customElements.get('smart-toc')) customElements.define('smart-toc', SmartTOC)
+</script>
+
+<style>
+  smart-toc :global(.toc-item) {
+    display: flow-root;
+  }
+
+  smart-toc :global(.highlight-bg-translucent) {
+    background-color: hsl(var(--muted) / var(--un-bg-opacity, 1));
+  }
+
+  smart-toc :global(.highlight-bg) {
+    background-color: hsl(var(--primary) / var(--un-bg-opacity, 1));
+  }
+</style>

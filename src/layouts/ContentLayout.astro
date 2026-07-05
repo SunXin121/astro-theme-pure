@@ -33,34 +33,33 @@ const { meta, highlightColor, back = '/', ...props } = Astro.props
     >
     </div>
 
-    <article class='min-w-0 grow'>
-      {/* Content header */}
-      <div id='content-header' class='animate'>
-        <slot name='header' />
-      </div>
+    <div class='content-column min-w-0 grow'>
+      <article class='min-w-0'>
+        {/* Content header */}
+        <div id='content-header' class='animate'>
+          <slot name='header' />
+        </div>
 
-      {/* Content */}
-      <div
-        id='content'
-        class={cn(
-          'max-w-none animate mt-8 md:min-w-[45ch] overflow-x-hidden',
-          integ.typography.class
-        )}
-      >
-        <slot />
+        {/* Content */}
+        <div
+          id='content'
+          class={cn(
+            'max-w-none animate mt-8 md:min-w-[45ch] overflow-x-hidden',
+            integ.typography.class
+          )}
+        >
+          <slot />
+        </div>
+      </article>
+
+      <div class='bottom mt-6'>
+        {/* Bottom */}
+        <div class='text-muted-foreground'>
+          <slot name='bottom' />
+        </div>
       </div>
-    </article>
+    </div>
   </main>
-
-  <div class='bottom mt-6 items-start gap-x-10 md:flex'>
-    {/* Bottom */}
-    <div class='flex-1 text-muted-foreground md:min-w-[50ch]'>
-      <slot name='bottom' />
-    </div>
-    <div class='min-w-48 basis-60'>
-      <slot name='bottom-sidebar' />
-    </div>
-  </div>
 
   <BackToTop header='content-header' content='content'>
     <button
@@ -104,6 +103,15 @@ const { meta, highlightColor, back = '/', ...props } = Astro.props
   @media (min-width: 769px) {
     #sidebar-shade {
       display: none !important;
+    }
+    #sidebar {
+      position: fixed;
+      inset-inline-end: max(1.75rem, calc((100vw - 70rem) / 2 + 2.5rem));
+      top: 5rem;
+      width: 15rem;
+    }
+    .content-column {
+      margin-inline-end: 17.5rem;
     }
   }
   @media (max-width: 769px) {

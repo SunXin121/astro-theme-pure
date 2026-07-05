@@ -1,8 +1,8 @@
 ---
 import type { MarkdownHeading, MarkdownLayoutProps } from 'astro'
 
-import { TOC } from 'astro-pure/components/pages'
 import { Icon } from 'astro-pure/user'
+import SmartTOC from '@/components/toc/SmartTOC.astro'
 import PageLayout from '@/layouts/ContentLayout.astro'
 
 type Props = MarkdownLayoutProps<{
@@ -21,7 +21,7 @@ const socialImage = heroImage?.src ?? '/images/social-card.png'
 ---
 
 <PageLayout meta={{ title, description, ogImage: socialImage }} back={back ?? '/'}>
-  {!!headings.length && <TOC {headings} slot='sidebar' />}
+  {!!headings.length && <SmartTOC {headings} slot='sidebar' />}
 
   <Fragment slot='header'>
     <h1 class='text-2xl font-medium sm:mb-2 sm:text-3xl'>
