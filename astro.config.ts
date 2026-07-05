@@ -11,15 +11,7 @@ import remarkMath from 'remark-math'
 // Local integrations
 // Local rehype & remark plugins
 import rehypeAutolinkHeadings from './src/plugins/rehype-auto-link-headings.ts'
-// Shiki
-import {
-  addCopyButton,
-  addLanguage,
-  addTitle,
-  transformerNotationDiff,
-  transformerNotationHighlight,
-  updateStyle
-} from './src/plugins/shiki-transformers.ts'
+import { getCodeBlockTransformers } from './src/modules/code-block-rendering.ts'
 import config from './src/site.config.ts'
 
 // https://astro.build/config
@@ -91,14 +83,7 @@ export default defineConfig({
         light: 'github-light',
         dark: 'github-dark'
       },
-      transformers: [
-        transformerNotationDiff(),
-        transformerNotationHighlight(),
-        updateStyle(),
-        addTitle(),
-        addLanguage(),
-        addCopyButton(2000)
-      ]
+      transformers: getCodeBlockTransformers()
     }
   },
   experimental: {

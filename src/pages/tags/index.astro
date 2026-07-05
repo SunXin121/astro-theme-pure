@@ -1,11 +1,10 @@
 ---
-import { getBlogCollection, getUniqueTagsWithCount } from 'astro-pure/server'
 import { Button } from 'astro-pure/user'
 import { cn } from 'astro-pure/utils'
 import PageLayout from '@/layouts/BaseLayout.astro'
+import { getTagIndexData } from '@/modules/blog-index'
 
-const allPosts = await getBlogCollection()
-const allTags = getUniqueTagsWithCount(allPosts)
+const allTags = await getTagIndexData()
 
 const meta = {
   description: "A list of all the topics I've written about in my posts",
